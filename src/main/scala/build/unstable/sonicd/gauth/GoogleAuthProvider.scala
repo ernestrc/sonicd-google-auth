@@ -35,7 +35,7 @@ class GoogleAuthProvider extends ExternalAuthProvider {
     implicit val sys: ActorSystem = system
     implicit val materializer = ActorMaterializer(ActorMaterializerSettings(system))
 
-    log.tylog(Level.INFO, traceId, GAuthGetTokenInfo, Variation.Attempt, "validating google oauth2 token")
+    log.tylog(Level.DEBUG, traceId, GAuthGetTokenInfo, Variation.Attempt, "validating google oauth2 token")
 
     val user = try {
       val token = auth.config("token").convertTo[String]
@@ -62,9 +62,9 @@ class GoogleAuthProvider extends ExternalAuthProvider {
 
     user.andThen {
       case Success(s) ⇒
-        log.tylog(Level.INFO, traceId, GAuthGetTokenInfo, Variation.Success, "authenticated user {}", s.user)
+        log.tylog(Level.DEBUG, traceId, GAuthGetTokenInfo, Variation.Success, "authenticated user {}", s.user)
       case Failure(e) ⇒
-        log.tylog(Level.INFO, traceId, GAuthGetTokenInfo, Variation.Failure(e), "failed to validate token")
+        log.tylog(Level.DEBUG, traceId, GAuthGetTokenInfo, Variation.Failure(e), "failed to validate token")
     }
   }
 }
