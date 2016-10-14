@@ -1,0 +1,7 @@
+target/
+.idea
+.idea_modules
+project/target
+project/project
+/bin/
+src/main/resources/application.conf
