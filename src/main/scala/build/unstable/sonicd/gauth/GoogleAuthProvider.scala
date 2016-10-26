@@ -4,7 +4,7 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.stream.{ActorMaterializer, ActorMaterializerSettings}
-import build.unstable.sonic.{ApiUser, AuthConfig, ExternalAuthProvider}
+import build.unstable.sonic.model.{ApiUser, AuthConfig, ExternalAuthProvider}
 import build.unstable.tylog.{TypedLogging, Variation}
 import org.slf4j.event.Level
 import spray.json.RootJsonFormat
@@ -26,8 +26,8 @@ class GoogleAuthProvider extends ExternalAuthProvider {
 
   import GoogleAuthProvider._
   import GoogleAuthProviderLogging._
-  import spray.json._
   import build.unstable.sonic.JsonProtocol._
+  import spray.json._
 
   override def validate(auth: AuthConfig, system: ActorSystem, traceId: String): Future[ApiUser] = {
     import system.dispatcher

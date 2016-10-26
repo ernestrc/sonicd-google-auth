@@ -5,7 +5,7 @@ object Build extends sbt.Build {
 
   val scalaV = "2.11.8"
   val akkaV = "2.4.9"
-  val sonicdV = "0.6.2"
+  val sonicdV = "0.6.8"
 
   val commonSettings = Seq(
     organization := "build.unstable.sonicd.gauth",
@@ -27,7 +27,7 @@ object Build extends sbt.Build {
       artifactName in(Compile, packageBin) := ((_, _, _) ⇒ "sonicd-gauth.jar"),
       libraryDependencies ++= {
         Seq(
-          "build.unstable" %% "sonicd-core" % sonicdV,
+          "build.unstable" %% "sonic-core" % sonicdV,
           "org.scalatest" %% "scalatest" % "2.2.4" % "test"
         )
       }
