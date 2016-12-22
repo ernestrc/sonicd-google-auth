@@ -51,7 +51,8 @@ class GoogleAuthProvider extends ExternalAuthProvider {
               val tokenInfo = entity.data.utf8String.parseJson.convertTo[TokenInfo]
               // write mode only if we know who is it
               val mode = if (tokenInfo.email.isDefined) AuthConfig.Mode.ReadWrite else AuthConfig.Mode.Read
-              ApiUser(tokenInfo.email.getOrElse("unknown-user"), 4, mode, None)
+              // TODO validate should be given .conf config to properly determine this values
+              ApiUser(tokenInfo.email.getOrElse("unknown-user"), 20, mode, None)
             }
         case HttpResponse(status, _, entity, _) ⇒
           entity.toStrict(40.seconds).flatMap(d ⇒ Future.failed(new Exception(d.data.utf8String)))
